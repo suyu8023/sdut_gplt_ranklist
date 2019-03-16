@@ -125,6 +125,16 @@
                     success: function (data) {
                         vm.list_problem_set=data.problem_set;
                         vm.list = data.ranklist;
+                        for (var i=0;i<data.ranklist.length;i++){
+                            // console.log(data.ranklist[i]);
+                            for (var j=0;j<data.ranklist[i].members.length;j++){
+                                vm.user_data.push(data.ranklist[i].members[j]);
+                            }
+                        }
+                        vm.user_data.sort(function (a, b) {
+                            return b.member_score-a.member_score;
+                        });
+                        // console.log(vm.user_data);
                     }
                 })
             },
