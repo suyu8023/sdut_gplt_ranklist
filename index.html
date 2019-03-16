@@ -2,21 +2,25 @@
 <html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-for="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
-    <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico"/>
     <title>山东理工大学第二届团体程序设计天梯赛</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
     <style>
-        td{
+        td {
             /*border-bottom:1px solid #76e1ff !important;*/
-            border-top:1px solid #76e1ff !important;
+            border-top: 1px solid #76e1ff !important;
         }
-        th{
-            border-bottom:1px solid #76e1ff !important;
-            border-top:1px solid #76e1ff !important;
+
+        th {
+            border-bottom: 1px solid #76e1ff !important;
+            border-top: 1px solid #76e1ff !important;
         }
     </style>
 </head>
@@ -27,40 +31,80 @@
         <div class="row">
             <div class="col-lg-12">
                 <img src="./static/image/cccc.jpg" style="width: 100%;min-width: 344.41px"/>
-                <table class="table" style="color: white;border: 1px solid #76e1ff;border-collapse:separate">
-                    <thead >
-                    <tr class="text-center" >
-                        <th class="text-center"></th>
-                        <th class="text-center">排名</th>
-                        <th class="text-center">总分</th>
-                        <th class="text-center">队伍名</th>
-                        <th class="text-center">学院 - 班级</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="item in list" :key="item.id" class="text-center" data-toggle="modal"
-                        data-target="#myModal"
-                        v-on:click="show(item)" style="cursor:pointer" v-on:mouseover="cover(item,$event)" v-on:mouseout="cover_out($event)" >
-                        <td v-if="item.rank==1"><img src="static/image/1st.png" style="height: 17px"></td>
-                        <td v-else-if="item.rank<4"><img src="static/image/c2.png" style="height: 17px"></td>
-                        <td v-else-if="item.rank<7"><img src="static/image/c3.png" style="height: 17px"></td>
-                        <td v-else-if="item.rank<11"><img src="static/image/c4.png" style="height: 17px"></td>
-                        <td v-else><img src=""></td>
-                        <td>{{item.rank}}</td>
-                        <td>{{item.team_score}}</td>
-                        <td>{{item.team_name}}</td>
-                        <td>{{item.team_college}} {{item.team_class}}</td>
+                <button type="button" class="btn" style="background-color: #76e1ff;width: 50%"
+                        v-on:click="select($event)">团队
+                    <button type="button" class="btn" style="background-color: #76e1ff;width: 50%"
+                            v-on:click="select($event)">个人
+                    </button>
+                    <table class="table" style="color: white;border: 1px solid #76e1ff;border-collapse:separate"
+                           id="team">
+                        <thead>
+                        <tr class="text-center">
+                            <th class="text-center"></th>
+                            <th class="text-center">排名</th>
+                            <th class="text-center">总分</th>
+                            <th class="text-center">队伍名</th>
+                            <th class="text-center">学院 - 班级</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="item in list" :key="item.id" class="text-center" data-toggle="modal"
+                            data-target="#myModal"
+                            v-on:click="show(item)" style="cursor:pointer" v-on:mouseover="cover(item,$event)"
+                            v-on:mouseout="cover_out($event)">
+                            <td v-if="item.rank==1"><img src="static/image/1st.png" style="height: 17px"></td>
+                            <td v-else-if="item.rank<4"><img src="static/image/c2.png" style="height: 17px"></td>
+                            <td v-else-if="item.rank<7"><img src="static/image/c3.png" style="height: 17px"></td>
+                            <td v-else-if="item.rank<11"><img src="static/image/c4.png" style="height: 17px"></td>
+                            <td v-else><img src=""></td>
+                            <td>{{item.rank}}</td>
+                            <td>{{item.team_score}}</td>
+                            <td>{{item.team_name}}</td>
+                            <td>{{item.team_college}} {{item.team_class}}</td>
 
-                    </tr>
+                        </tr>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                    <table class="table" style="color: white;border: 1px solid #76e1ff;border-collapse:separate;display: none"
+                           id="per">
+                        <thead>
+                        <tr class="text-center">
+                            <th class="text-center"></th>
+                            <th class="text-center">排名</th>
+                            <th class="text-center">姓名</th>
+                            <th class="text-center">分数</th>
+                            <th class="text-center">学院</th>
+                            <th class="text-center">班级</th>
+                            <th class="text-center">班级</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="item in list" :key="item.id" class="text-center" data-toggle="modal"
+                            data-target="#myModal"
+                            v-on:click="show(item)" style="cursor:pointer" v-on:mouseover="cover(item,$event)"
+                            v-on:mouseout="cover_out($event)">
+                            <td v-if="item.rank==1"><img src="static/image/1st.png" style="height: 17px"></td>
+                            <td v-else-if="item.rank<4"><img src="static/image/c2.png" style="height: 17px"></td>
+                            <td v-else-if="item.rank<7"><img src="static/image/c3.png" style="height: 17px"></td>
+                            <td v-else-if="item.rank<11"><img src="static/image/c4.png" style="height: 17px"></td>
+                            <td v-else><img src=""></td>
+                            <td>{{item.rank}}</td>
+                            <td>{{item.team_score}}</td>
+                            <td>{{item.team_name}}</td>
+                            <td>{{item.team_college}} {{item.team_class}}</td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
             </div>
             <div class="footer text-center">
                 <p style="color: white;font-size: 18px">
                     Designed by <a href="https://github.com/suyu8023" target="_blank" style="color: #09f">suyu</a>
                     &nbsp;&nbsp;Special Thanks to <a href="https://github.com/zbge" target="_blank" style="color: #09f">木杉</a>
-                    &nbsp;&nbsp;<a href="https://github.com/suyu8023/sdut_gplt_ranklist" target="_blank" style="color: #65ddff">View on GitHub</a>
+                    &nbsp;&nbsp;<a href="https://github.com/suyu8023/sdut_gplt_ranklist" target="_blank"
+                                   style="color: #65ddff">View on GitHub</a>
                 </p>
 
             </div>
@@ -74,7 +118,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="person" style="color: white " >
+                    <h4 class="modal-title" id="person" style="color: white ">
                         {{show_data}}
                     </h4>
                 </div>
@@ -90,7 +134,8 @@
                         <tbody>
                         <tr v-for="item in show_list" :key="item.id" class="text-center">
 
-                            <td v-if="max==item.member_score" class="text-left">{{item.member_name}} <span style="color: red">mvp</span></td>
+                            <td v-if="max==item.member_score" class="text-left">{{item.member_name}} <span
+                                    style="color: red">mvp</span></td>
                             <td v-else class="text-left">{{item.member_name}}</td>
                             <td>{{item.member_score}}</td>
                             <td v-for="data in item.scores">{{data}}</td>
@@ -109,9 +154,9 @@
             list: [],
             show_data: null,
             show_list: [],
-            max:-1,
-            list_problem_set:[],
-            user_data:[]
+            max: -1,
+            list_problem_set: [],
+            user_data: []
         },
         mounted: function () {
             this.showData();
@@ -123,34 +168,44 @@
                     url: "ranklist.json",
                     datatype: "json",
                     success: function (data) {
-                        vm.list_problem_set=data.problem_set;
+                        vm.list_problem_set = data.problem_set;
                         vm.list = data.ranklist;
-                        for (var i=0;i<data.ranklist.length;i++){
-                            // console.log(data.ranklist[i]);
-                            for (var j=0;j<data.ranklist[i].members.length;j++){
+                        for (var i = 0; i < data.ranklist.length; i++) {
+                            for (var j = 0; j < data.ranklist[i].members.length; j++) {
                                 vm.user_data.push(data.ranklist[i].members[j]);
                             }
                         }
                         vm.user_data.sort(function (a, b) {
-                            return b.member_score-a.member_score;
+                            return b.member_score - a.member_score;
                         });
-                        // console.log(vm.user_data);
                     }
                 })
             },
             show: function (data) {
                 vm.show_data = data.team_name + " (团队分数: " + data.team_score + ")";
                 vm.show_list = data.members;
-                vm.max=Math.max.apply(Math, data.members.map(function(e) {return e.member_score}))
-                if (vm.max==0){
-                    vm.max=-1;
+                vm.max = Math.max.apply(Math, data.members.map(function (e) {
+                    return e.member_score
+                }))
+                if (vm.max == 0) {
+                    vm.max = -1;
                 }
             },
-            cover:function (data,$event) {
-                $event.currentTarget.style.backgroundColor=parseInt(data.rank)==1?"#D15FEE":parseInt(data.rank)<4?"#f8bf29":parseInt(data.rank)<7?"silver":parseInt(data.rank)<11?"#cb7d31":"#8DB6CD";
+            cover: function (data, $event) {
+                $event.currentTarget.style.backgroundColor = parseInt(data.rank) == 1 ? "#D15FEE" : parseInt(data.rank) < 4 ? "#f8bf29" : parseInt(data.rank) < 7 ? "silver" : parseInt(data.rank) < 11 ? "#cb7d31" : "#8DB6CD";
             },
-            cover_out:function ($event) {
-                $event.currentTarget.style.backgroundColor="#19264a";
+            cover_out: function ($event) {
+                $event.currentTarget.style.backgroundColor = "#19264a";
+            },
+            select: function ($event) {
+                if ($event.currentTarget.innerText == "个人") {
+                    document.getElementById("team").style.display = "none";
+                    document.getElementById("per").style.display = "";
+                }
+                else{
+                    document.getElementById("team").style.display = "";
+                    document.getElementById("per").style.display = "none";
+                }
             }
         }
     });
